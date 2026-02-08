@@ -1,6 +1,9 @@
 import type { MDXComponents } from 'mdx/types';
 import Link from 'next/link';
+import React from 'react';
 import { cn } from '@/lib/utils';
+import { MermaidChartWrapper } from './mermaid-chart-wrapper';
+import { MermaidFallback } from './mermaid-fallback';
 
 function createHeading(level: 1 | 2 | 3 | 4 | 5 | 6) {
   const Tag = `h${level}` as keyof JSX.IntrinsicElements;
@@ -36,10 +39,36 @@ export const mdxComponents: MDXComponents = {
       </Link>
     );
   },
-  img: ({ src, alt, ...props }) => (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img src={src ?? ''} alt={alt ?? ''} className="rounded-lg border max-w-full h-auto" {...props} />
-  ),
+  img: ({ src, alt, id, ...props }) => {
+    const isMermaid =
+      (typeof id === 'string' && id.startsWith('mermaid-')) ||
+      (typeof src === 'string' && (src.startsWith('data:image/svg') || src.startsWith('data:image/xml+svg')));
+    if (isMermaid) {
+      return (
+        <MermaidChartWrapper>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={src ?? ''} alt={alt ?? ''} id={id} className="max-w-full h-auto" {...props} />
+        </MermaidChartWrapper>
+      );
+    }
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img src={src ?? ''} alt={alt ?? ''} className="rounded-lg border max-w-full h-auto" {...props} />
+    );
+  },
+  picture: ({ children, ...props }) => {
+    const hasMermaidChild = React.Children.toArray(children).some(
+      (c) => React.isValidElement(c) && (c.props?.id?.startsWith?.('mermaid-') ?? c.props?.srcset?.includes?.('svg'))
+    );
+    if (hasMermaidChild) {
+      return (
+        <MermaidChartWrapper>
+          <picture {...props}>{children}</picture>
+        </MermaidChartWrapper>
+      );
+    }
+    return <picture {...props}>{children}</picture>;
+  },
   blockquote: ({ children, className, ...props }) => (
     <blockquote className={cn('border-l-4 border-primary pl-4 py-1 my-4 text-muted-foreground italic', className)} {...props}>
       {children}
@@ -62,11 +91,26 @@ export const mdxComponents: MDXComponents = {
       {children}
     </td>
   ),
-  pre: ({ children, ...props }) => (
-    <pre className="my-4 overflow-x-auto rounded-lg border bg-muted/30 p-4 text-sm" {...props}>
-      {children}
-    </pre>
-  ),
+  pre: ({ children, className, ...props }) => {
+    const cnStr = typeof className === 'string' ? className : Array.isArray(className) ? className.join(' ') : '';
+    if (cnStr.includes('mermaid-fallback')) {
+      const first = React.Children.toArray(children)[0];
+      const codeContent =
+        React.isValidElement(first) && first.props?.children != null
+          ? typeof first.props.children === 'string'
+            ? first.props.children
+            : Array.isArray(first.props.children)
+              ? first.props.children.join('')
+              : ''
+          : '';
+      return <MermaidFallback code={String(codeContent)} />;
+    }
+    return (
+      <pre className="my-4 overflow-x-auto rounded-lg border bg-muted/30 p-4 text-sm" {...props}>
+        {children}
+      </pre>
+    );
+  },
   code: ({ children, className, ...props }) => {
     const isInline = !className;
     if (isInline) {

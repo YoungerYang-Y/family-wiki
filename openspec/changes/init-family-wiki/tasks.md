@@ -33,20 +33,20 @@
 
 ### Milestone 3: Mermaid 图表支持
 
-- [ ] Task 3.1: 集成 Mermaid 构建期渲染——实现 rehype 插件，将 Mermaid 代码块在构建期转换为 SVG
-- [ ] Task 3.2: 实现 Mermaid SVG 展示组件（支持缩放、全屏查看、暗色模式适配）
-- [ ] Task 3.3: 处理 Mermaid 渲染降级——构建期渲染失败时，保留代码块 + 客户端懒加载 fallback
-- [ ] Task 3.4: 编写 Mermaid 渲染测试用例（flowchart、sequence、gantt 等常见图表类型）
+- [x] Task 3.1: 集成 Mermaid 构建期渲染——实现 rehype 插件，将 Mermaid 代码块在构建期转换为 SVG
+- [x] Task 3.2: 实现 Mermaid SVG 展示组件（支持缩放、全屏查看、暗色模式适配）
+- [x] Task 3.3: 处理 Mermaid 渲染降级——构建期渲染失败时，保留代码块 + 客户端懒加载 fallback
+- [x] Task 3.4: 编写 Mermaid 渲染测试用例（flowchart、sequence、gantt 等常见图表类型）
 
 **依赖关系**：Task 3.1 依赖 Milestone 2（MDX 管线就绪）；Task 3.2 依赖 3.1；Task 3.3 依赖 3.1；Task 3.4 依赖 3.1~3.3
 
 ### Milestone 4: AI 友好的结构化数据
 
-- [ ] Task 4.1: 实现 JSON-LD 结构化数据生成——Article、BreadcrumbList、WebSite schema，注入到每个页面 `<head>`
-- [ ] Task 4.2: 实现 Open Graph / Twitter Card meta 标签生成（基于 frontmatter）
-- [ ] Task 4.3: 实现 `llms.txt` / `llms-full.txt` 生成——按照 llms.txt 规范，输出站点结构和内容摘要
-- [ ] Task 4.4: 确保 HTML 语义化——使用 `<article>`、`<nav>`、`<aside>`、`<section>`、`<time>` 等语义标签
-- [ ] Task 4.5: 编写结构化数据验证测试（JSON-LD 输出校验、meta 标签完整性校验）
+- [x] Task 4.1: 实现 JSON-LD 结构化数据生成——Article、BreadcrumbList、WebSite schema，注入到每个页面 `<head>`
+- [x] Task 4.2: 实现 Open Graph / Twitter Card meta 标签生成（基于 frontmatter）
+- [x] Task 4.3: 实现 `llms.txt` / `llms-full.txt` 生成——按照 llms.txt 规范，输出站点结构和内容摘要
+- [x] Task 4.4: 确保 HTML 语义化——使用 `<article>`、`<nav>`、`<aside>`、`<section>`、`<time>` 等语义标签
+- [x] Task 4.5: 编写结构化数据验证测试（JSON-LD 输出校验、meta 标签完整性校验）
 
 **依赖关系**：Task 4.1~4.4 依赖 Milestone 2（页面就绪），可相互并行；Task 4.5 依赖 4.1~4.4
 

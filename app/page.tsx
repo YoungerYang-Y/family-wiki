@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import { allWikis } from 'contentlayer/generated';
 import { getSidebarCategories } from '@/lib/categories';
+import { JsonLd } from '@/components/shared/json-ld';
+import { buildWebSiteJsonLd } from '@/lib/json-ld';
+import { siteConfig } from '@/config/site';
 
 export default function HomePage() {
   const posts = allWikis.filter((doc) => !doc.draft);
@@ -13,6 +16,7 @@ export default function HomePage() {
 
   return (
     <div>
+      <JsonLd data={buildWebSiteJsonLd(siteConfig)} />
       <h1 className="text-3xl font-bold">Family Wiki</h1>
       <p className="mt-2 text-muted-foreground">个人决策型知识库</p>
 

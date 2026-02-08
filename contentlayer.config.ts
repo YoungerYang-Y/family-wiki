@@ -2,6 +2,7 @@ import { defineDocumentType, makeSource } from 'contentlayer2/source-files';
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeMermaid from 'rehype-mermaid';
 import rehypePrettyCode from 'rehype-pretty-code';
 
 export const Wiki = defineDocumentType(() => ({
@@ -61,6 +62,30 @@ export default makeSource({
     rehypePlugins: [
       rehypeSlug,
       [rehypeAutolinkHeadings, { behavior: 'wrap', properties: { className: ['anchor'] } }],
+      [
+        rehypeMermaid,
+        {
+          strategy: 'img-svg',
+          dark: true,
+          errorFallback(_element: unknown, diagram: string, _error: unknown, _file: unknown) {
+            return {
+              type: 'element',
+              tagName: 'pre',
+              properties: {
+                className: ['mermaid-fallback', 'my-4', 'overflow-x-auto', 'rounded-lg', 'border', 'bg-muted/30', 'p-4', 'text-sm'],
+              },
+              children: [
+                {
+                  type: 'element',
+                  tagName: 'code',
+                  properties: { className: ['language-mermaid'] },
+                  children: [{ type: 'text', value: diagram }],
+                },
+              ],
+            };
+          },
+        },
+      ],
       [rehypePrettyCode, { theme: 'github-dark' }],
     ],
   },

@@ -7,6 +7,10 @@ export default defineConfig({
     include: ['**/*.test.{ts,tsx}'],
   },
   resolve: {
-    alias: { '@': path.resolve(__dirname, './') },
+    alias: {
+      '@': path.resolve(__dirname, './'),
+      mermaid: path.resolve(__dirname, '__mocks__/mermaid.ts'),
+      flexsearch: path.resolve(__dirname, '__mocks__/flexsearch.ts'),
+    },
   },
 });
