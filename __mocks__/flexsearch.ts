@@ -9,7 +9,7 @@ interface DocumentOptions {
     id: string;
     store?: boolean;
     index: Array<{ field: string; tokenize?: string }>;
-    tag?: Array<{ field: string }>;
+    tag?: string | Array<{ field: string }>;
   };
 }
 
@@ -29,7 +29,12 @@ class MockDocument {
   constructor(options: DocumentOptions) {
     this.idField = options.document.id;
     this.fields = options.document.index.map((f) => f.field);
-    this.tagFields = (options.document.tag ?? []).map((t) => t.field);
+    const tag = options.document.tag;
+    this.tagFields = typeof tag === 'string'
+      ? [tag]
+      : Array.isArray(tag)
+        ? tag.map((t) => t.field)
+        : [];
   }
 
   add(doc: Record<string, unknown>): void {

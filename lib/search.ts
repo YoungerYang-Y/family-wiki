@@ -47,6 +47,7 @@ export function stripMarkdownToPlainText(md: string): string {
 
 /** 高亮关键词：在文本中包裹匹配的 query 为 <mark> */
 export function highlightQuery(text: string, query: string): string {
+  if (typeof text !== 'string') return '';
   if (!query.trim()) return text;
   const q = query.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const re = new RegExp(`(${q})`, 'gi');

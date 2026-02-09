@@ -29,7 +29,17 @@ export async function loadSearchClient(): Promise<SearchClient> {
   loadPromise = (async (): Promise<SearchClient> => {
     const res = await fetch('/search-index.json');
     if (!res.ok) throw new Error('Failed to load search index');
-    const items: SearchIndexItem[] = await res.json();
+    const rawItems: SearchIndexItem[] = await res.json();
+    // FlexSearch 内部对索引字段会调用 .split()，只传入已知字符串字段，避免传入未知/非字符串属性
+    const items: SearchIndexItem[] = rawItems.map((item) => ({
+      id: String(item?.id ?? ''),
+      title: String(item?.title ?? ''),
+      description: String(item?.description ?? ''),
+      content: String(item?.content ?? ''),
+      category: String(item?.category ?? ''),
+      tags: Array.isArray(item?.tags) ? item.tags.map((t) => String(t)) : [],
+      url: String(item?.url ?? ''),
+    }));
 
     const FlexSearch = (await import('flexsearch')).default;
     const { Document } = FlexSearch;
@@ -43,7 +53,7 @@ export async function loadSearchClient(): Promise<SearchClient> {
           { field: 'description', tokenize: 'forward' },
           { field: 'content', tokenize: 'forward' },
         ],
-        tag: [{ field: 'category' }],
+        tag: 'category',
       },
     } as never);
 
@@ -54,7 +64,7 @@ export async function loadSearchClient(): Promise<SearchClient> {
 
     const search = (query: string, options?: { limit?: number; category?: string }): SearchResultItem[] => {
       const limit = options?.limit ?? 20;
-      const q = (query ?? '').trim();
+      const q = (typeof query === 'string' ? query : '').trim();
       if (!q) return [];
 
       // FlexSearch Document.search 的 tag 为 string | string[]，表示按 tag 字段过滤的值
