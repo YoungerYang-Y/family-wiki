@@ -33,7 +33,7 @@ export function getSidebarCategories(allWikis: { category: string }[]): { name: 
     countByCategory[doc.category] = (countByCategory[doc.category] ?? 0) + 1;
   }
   const categoryNames =
-    Object.keys(meta).length > 0 ? Object.keys(meta) : [...new Set(allWikis.map((d) => d.category))].filter(Boolean).sort();
+    Object.keys(meta).length > 0 ? Object.keys(meta) : Array.from(new Set(allWikis.map((d) => d.category))).filter(Boolean).sort();
   return categoryNames.map((name) => ({
     name,
     label: meta[name]?.label ?? name,

@@ -52,26 +52,26 @@
 
 ### Milestone 5: 客户端搜索
 
-- [ ] Task 5.1: 集成 FlexSearch，构建期生成搜索索引（标题、正文、标签、分类）
-- [ ] Task 5.2: 实现搜索 UI 组件——Command Palette 风格（`Cmd+K` 快捷键唤起）、搜索结果高亮、键盘导航
-- [ ] Task 5.3: 实现搜索索引懒加载——首次触发搜索时才加载索引文件，减少首屏体积
-- [ ] Task 5.4: 编写搜索功能测试（索引生成、搜索准确性、中文分词）
+- [x] Task 5.1: 集成 FlexSearch，构建期生成搜索索引（标题、正文、标签、分类）
+- [x] Task 5.2: 实现搜索 UI 组件——Command Palette 风格（`Cmd+K` 快捷键唤起）、搜索结果高亮、键盘导航
+- [x] Task 5.3: 实现搜索索引懒加载——首次触发搜索时才加载索引文件，减少首屏体积
+- [x] Task 5.4: 编写搜索功能测试（索引生成、搜索准确性、中文分词）
 
 **依赖关系**：Task 5.1 依赖 Milestone 1（Contentlayer 就绪）；Task 5.2 依赖 5.1 + Milestone 2（UI 就绪）；Task 5.3 依赖 5.1 + 5.2；Task 5.4 依赖 5.1~5.3
 
 ### Milestone 6: 在线编辑器与 GitHub API 集成
 
-- [ ] Task 6.1: 实现 GitHub Contents API 封装层——读取文件、创建文件、更新文件、获取文件 SHA（`lib/github.ts`）
-- [ ] Task 6.2: 实现编辑鉴权——密码验证 API Route（`/api/auth`），服务端校验密码，返回 JWT token
-- [ ] Task 6.3: 实现编辑鉴权中间件——保护 `/api/content/*` 路由，校验 token 有效性
-- [ ] Task 6.4: 集成 Milkdown 编辑器组件——Markdown 实时预览、工具栏（标题、粗体、链接、图片、代码块、Mermaid 插入）
-- [ ] Task 6.5: 实现文章编辑页面（`/editor/[category]/[slug]`）——加载已有内容、frontmatter 表单编辑、Milkdown 正文编辑
-- [ ] Task 6.6: 实现文章新建页面（`/editor`）——选择分类、填写 frontmatter、编写正文
-- [ ] Task 6.7: 实现发布 API（`POST /api/content`）——接收 Markdown 内容，通过 GitHub Contents API 提交到仓库
-- [ ] Task 6.8: 实现发布流程 UI——密码输入 Dialog → 保存确认 → 提交反馈（成功/失败 Toast）
-- [ ] Task 6.9: 实现编辑冲突处理——提交前获取最新 SHA，冲突时提示用户
-- [ ] Task 6.10: 编写 GitHub API 集成测试（Mock GitHub API，测试 CRUD 流程）
-- [ ] Task 6.11: 编写编辑器 E2E 测试（打开编辑页 → 修改内容 → 密码验证 → 提交成功）
+- [x] Task 6.1: 实现 GitHub Contents API 封装层——读取文件、创建文件、更新文件、获取文件 SHA（`lib/github.ts`）
+- [x] Task 6.2: 实现编辑鉴权——密码验证 API Route（`/api/auth`），服务端校验密码，返回 JWT token
+- [x] Task 6.3: 实现编辑鉴权中间件——保护 `/api/content/*` 路由，校验 token 有效性
+- [x] Task 6.4: 集成 Milkdown 编辑器组件——Markdown 实时预览、工具栏（标题、粗体、链接、图片、代码块、Mermaid 插入）
+- [x] Task 6.5: 实现文章编辑页面（`/editor/[category]/[slug]`）——加载已有内容、frontmatter 表单编辑、Milkdown 正文编辑
+- [x] Task 6.6: 实现文章新建页面（`/editor`）——选择分类、填写 frontmatter、编写正文
+- [x] Task 6.7: 实现发布 API（`POST /api/content`）——接收 Markdown 内容，通过 GitHub Contents API 提交到仓库
+- [x] Task 6.8: 实现发布流程 UI——密码输入 Dialog → 保存确认 → 提交反馈（成功/失败 Toast）
+- [x] Task 6.9: 实现编辑冲突处理——提交前获取最新 SHA，冲突时提示用户
+- [x] Task 6.10: 编写 GitHub API 集成测试（Mock GitHub API，测试 CRUD 流程）
+- [x] Task 6.11: 编写编辑器 E2E 测试（打开编辑页 → 修改内容 → 密码验证 → 提交成功）
 
 **依赖关系**：Task 6.1 独立；Task 6.2 → 6.3（顺序）；Task 6.4 独立（UI 组件）；Task 6.5 依赖 6.1 + 6.4；Task 6.6 依赖 6.5；Task 6.7 依赖 6.1 + 6.3；Task 6.8 依赖 6.2 + 6.7；Task 6.9 依赖 6.7；Task 6.10 依赖 6.1 + 6.7；Task 6.11 依赖 6.5~6.9
 

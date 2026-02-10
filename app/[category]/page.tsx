@@ -10,7 +10,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const categories = [...new Set(allWikis.filter((d) => !d.draft).map((d) => d.category))];
+  const categories = Array.from(new Set(allWikis.filter((d) => !d.draft).map((d) => d.category)));
   return categories.map((category) => ({ category }));
 }
 

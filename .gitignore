@@ -20,6 +20,7 @@ yarn.lock
 # misc
 .DS_Store
 *.pem
+*.tsbuildinfo
 
 # debug
 npm-debug.log*
@@ -39,3 +40,6 @@ yarn-error.log*
 
 # turbo
 .turbo
+
+playwright-report/
+test-results/
