@@ -34,14 +34,16 @@ jobs:
       - name: Test
         run: pnpm run test
 
+      # 构建期 rehype-mermaid 需无头浏览器渲染 Mermaid，故须安装 Playwright 浏览器
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps chromium
+
       - name: Build
         run: pnpm run build
         env:
           NEXT_PUBLIC_SITE_URL: https://example.com
 
-      # E2E 暂不跑：需 dev 服务器 + 浏览器，CI 易超时/环境差异。本地可执行 pnpm run test:e2e
-      # - name: Install Playwright Browsers
-      #   run: pnpm exec playwright install --with-deps chromium
+      # E2E 暂不跑：需 dev 服务器，CI 易超时。本地可执行 pnpm run test:e2e
       # - name: E2E
       #   run: pnpm run test:e2e
       #   timeout-minutes: 10
