@@ -2,7 +2,7 @@ import type { MDXComponents } from 'mdx/types';
 import Link from 'next/link';
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { MermaidChartWrapper } from './mermaid-chart-wrapper';
+import { MermaidChartWrapper, MermaidInsideWrapperContext } from './mermaid-chart-wrapper';
 import { MermaidFallback } from './mermaid-fallback';
 
 function createHeading(level: 1 | 2 | 3 | 4 | 5 | 6) {
@@ -43,12 +43,19 @@ export const mdxComponents: MDXComponents = {
     const isMermaid =
       (typeof id === 'string' && id.startsWith('mermaid-')) ||
       (typeof src === 'string' && (src.startsWith('data:image/svg') || src.startsWith('data:image/xml+svg')));
-    if (isMermaid) {
+    const insideWrapper = React.useContext(MermaidInsideWrapperContext);
+    if (isMermaid && !insideWrapper) {
       return (
         <MermaidChartWrapper>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={src ?? ''} alt={alt ?? ''} id={id} className="max-w-full h-auto" {...props} />
         </MermaidChartWrapper>
+      );
+    }
+    if (isMermaid && insideWrapper) {
+      return (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img src={src ?? ''} alt={alt ?? ''} id={id} className="max-w-full h-auto" {...props} />
       );
     }
     return (

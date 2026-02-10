@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, createContext } from 'react';
 import { Maximize2, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,9 @@ import {
   DialogContent,
   DialogTitle,
 } from '@/components/ui/dialog';
+
+/** 避免 picture 与内部 img 重复包装导致双层框 */
+export const MermaidInsideWrapperContext = createContext(false);
 
 interface MermaidChartWrapperProps {
   children: React.ReactNode;
@@ -26,12 +29,13 @@ export function MermaidChartWrapper({ children, className }: MermaidChartWrapper
   const closeFullscreen = useCallback(() => setFullscreenOpen(false), []);
 
   return (
-    <figure
-      className={cn('my-4 flex flex-col items-center gap-2', className)}
-      role="img"
-      aria-label="Mermaid 图表"
-    >
-      <div className="relative inline-block max-w-full overflow-x-auto rounded-lg border bg-muted/20 p-2">
+    <MermaidInsideWrapperContext.Provider value={true}>
+      <figure
+        className={cn('my-4 flex flex-col items-center gap-2', className)}
+        role="img"
+        aria-label="Mermaid 图表"
+      >
+        <div className="relative inline-block max-w-full overflow-x-auto rounded-lg border bg-muted/20 p-2">
         <div className="flex justify-end">
           <Button
             type="button"
@@ -69,6 +73,7 @@ export function MermaidChartWrapper({ children, className }: MermaidChartWrapper
           </div>
         </DialogContent>
       </Dialog>
-    </figure>
+      </figure>
+    </MermaidInsideWrapperContext.Provider>
   );
 }
