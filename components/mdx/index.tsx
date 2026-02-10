@@ -40,15 +40,16 @@ export const mdxComponents: MDXComponents = {
     );
   },
   img: ({ src, alt, id, ...props }) => {
+    const srcStr = src ?? '';
     const isMermaid =
       (typeof id === 'string' && id.startsWith('mermaid-')) ||
-      (typeof src === 'string' && (src.startsWith('data:image/svg') || src.startsWith('data:image/xml+svg')));
+      (typeof srcStr === 'string' && (srcStr.startsWith('data:image/svg') || srcStr.startsWith('data:image/xml+svg')));
     const insideWrapper = React.useContext(MermaidInsideWrapperContext);
     if (isMermaid && !insideWrapper) {
       return (
         <MermaidChartWrapper>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={src ?? ''} alt={alt ?? ''} id={id} className="max-w-full h-auto" {...props} />
+          <img src={srcStr} alt={alt ?? ''} id={id} className="max-w-full h-auto" {...props} />
         </MermaidChartWrapper>
       );
     }
@@ -60,7 +61,7 @@ export const mdxComponents: MDXComponents = {
     }
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={src ?? ''} alt={alt ?? ''} className="rounded-lg border max-w-full h-auto" {...props} />
+      <img src={srcStr} alt={alt ?? ''} className="rounded-lg border max-w-full h-auto" {...props} />
     );
   },
   picture: ({ children, ...props }) => {

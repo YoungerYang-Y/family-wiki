@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: doc.title,
     description: doc.description,
+    alternates: { canonical: url },
     openGraph: {
       title: doc.title,
       description: doc.description ?? undefined,

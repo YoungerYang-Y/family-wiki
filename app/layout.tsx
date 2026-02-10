@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Noto_Sans_SC } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/components/shared/theme-provider';
@@ -10,9 +11,16 @@ import { getSidebarCategories } from '@/lib/categories';
 import { allWikis } from 'contentlayer/generated';
 import { siteConfig } from '@/config/site';
 
+const notoSansSC = Noto_Sans_SC({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
+});
+
 const baseUrl = siteConfig.url.replace(/\/$/, '');
 
 export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
   title: { default: 'Family Wiki', template: '%s | Family Wiki' },
   description: '个人决策型知识库',
   openGraph: {
@@ -43,8 +51,8 @@ export default function RootLayout({
   const sidebarCategories = getSidebarCategories(posts);
 
   return (
-    <html lang="zh-CN" suppressHydrationWarning>
-      <body className="min-h-screen antialiased flex flex-col">
+    <html lang="zh-CN" suppressHydrationWarning className={notoSansSC.variable}>
+      <body className="min-h-screen antialiased flex flex-col font-sans">
         <ThemeProvider>
         <Header rightSlot={<><SearchDialog /><Sidebar categories={sidebarCategories} mobile /></>} />
         <div className="flex flex-1">

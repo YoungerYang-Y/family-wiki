@@ -87,13 +87,13 @@
 
 ### Milestone 8: 部署与生产就绪
 
-- [ ] Task 8.1: 配置 Vercel 部署——`vercel.json`、环境变量配置、ISR/SSR 策略配置
-- [ ] Task 8.2: 配置 Vercel GitHub Integration——Push to main 自动部署、PR Preview 部署
-- [ ] Task 8.3: 性能优化——Image 优化（next/image）、字体优化（next/font）、Bundle 分析与优化
-- [ ] Task 8.4: SEO 完善——`sitemap.xml` 生成、`robots.txt`、Canonical URL
-- [ ] Task 8.5: 错误处理完善——自定义 404 页面、500 页面、全局 Error Boundary
-- [ ] Task 8.6: 更新 README.md——项目介绍、本地开发指南、环境变量说明、部署说明、内容编写指南
-- [ ] Task 8.7: 端到端冒烟测试——完整流程验证（首页 → 文章 → 搜索 → 编辑 → 发布 → RSS）
+- [x] Task 8.1: 配置 Vercel 部署——`vercel.json`、环境变量配置、ISR/SSR 策略配置
+- [x] Task 8.2: 配置 Vercel GitHub Integration——Push to main 自动部署、PR Preview 部署
+- [x] Task 8.3: 性能优化——Image 优化（next/image）、字体优化（next/font）、Bundle 分析与优化
+- [x] Task 8.4: SEO 完善——`sitemap.xml` 生成、`robots.txt`、Canonical URL
+- [x] Task 8.5: 错误处理完善——自定义 404 页面、500 页面、全局 Error Boundary
+- [x] Task 8.6: 更新 README.md——项目介绍、本地开发指南、环境变量说明、部署说明、内容编写指南
+- [x] Task 8.7: 端到端冒烟测试——完整流程验证（首页 → 文章 → 搜索 → 编辑 → 发布 → RSS）
 
 **依赖关系**：Task 8.1 依赖 Milestone 1~7 全部完成；Task 8.2 依赖 8.1；Task 8.3~8.5 可与 8.1 并行；Task 8.6 依赖所有 Milestone；Task 8.7 依赖 8.1~8.5
 

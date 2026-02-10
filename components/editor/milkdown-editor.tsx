@@ -14,6 +14,7 @@ import {
 import { gfm } from "@milkdown/preset-gfm";
 import { history } from "@milkdown/plugin-history";
 import { listener, listenerCtx } from "@milkdown/plugin-listener";
+import type { MilkdownPlugin } from "@milkdown/ctx";
 import { nord } from "@milkdown/theme-nord";
 import { cn } from "@/lib/utils";
 import { Heading1, Heading2, Heading3, Bold, Link, Image, Code, GitBranch } from "lucide-react";
@@ -178,7 +179,7 @@ function MilkdownEditorInner({
             });
           }
         })
-        .use(nord)
+        .use(nord as MilkdownPlugin)
         .use(commonmark)
         .use(gfm)
         .use(history)

@@ -10,6 +10,7 @@
     "dev": "next dev",
     "build": "pnpm run build:search-index && next build",
     "build:search-index": "node scripts/build-search-index.mjs",
+    "build:analyze": "ANALYZE=true pnpm run build",
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -51,6 +52,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
+    "@next/bundle-analyzer": "^16.1.6",
     "@playwright/test": "^1.58.2",
     "@tailwindcss/typography": "^0.5.10",
     "@testing-library/react": "^16.0.0",
