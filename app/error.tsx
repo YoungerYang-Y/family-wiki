@@ -12,7 +12,9 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error('Application error:', error);
+    const msg = error?.message ?? 'Unknown error';
+    const digest = error?.digest;
+    console.error('Application error:', digest ? `digest=${digest} message=${msg}` : msg);
   }, [error]);
 
   return (

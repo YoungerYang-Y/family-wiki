@@ -5,8 +5,10 @@ import { cn } from '@/lib/utils';
 import { MermaidChartWrapper, MermaidInsideWrapperContext } from './mermaid-chart-wrapper';
 import { MermaidFallback } from './mermaid-fallback';
 
+type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
 function createHeading(level: 1 | 2 | 3 | 4 | 5 | 6) {
-  const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+  const Tag = `h${level}` as HeadingTag;
   return function MDXHeading({ children, className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
     return (
       <Tag className={cn('scroll-mt-20 font-semibold', level === 1 && 'text-2xl mt-8 mb-4', level === 2 && 'text-xl mt-6 mb-3', level >= 3 && 'text-lg mt-4 mb-2', className)} {...props}>
@@ -39,7 +41,7 @@ export const mdxComponents: MDXComponents = {
       </Link>
     );
   },
-  img: ({ src, alt, id, ...props }) => {
+  img: function MdxImg({ src, alt, id, ...props }) {
     const srcStr = src ?? '';
     const isMermaid =
       (typeof id === 'string' && id.startsWith('mermaid-')) ||

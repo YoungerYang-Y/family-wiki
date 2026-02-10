@@ -17,7 +17,7 @@ import { listener, listenerCtx } from "@milkdown/plugin-listener";
 import type { MilkdownPlugin } from "@milkdown/ctx";
 import { nord } from "@milkdown/theme-nord";
 import { cn } from "@/lib/utils";
-import { Heading1, Heading2, Heading3, Bold, Link, Image, Code, GitBranch } from "lucide-react";
+import { Heading1, Heading2, Heading3, Bold, Link, Image as ImageIcon, Code, GitBranch } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface MilkdownEditorProps {
@@ -133,7 +133,7 @@ function EditorToolbar({
         }
         title="图片"
       >
-        <Image className="h-4 w-4" />
+        <ImageIcon className="h-4 w-4" aria-hidden />
       </Button>
       <Button
         type="button"

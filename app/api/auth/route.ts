@@ -23,6 +23,7 @@ export async function POST(request: Request) {
 
   try {
     if (!verifyPassword(password)) {
+      console.error('[API] POST /api/auth code=401 message=密码错误');
       return NextResponse.json(
         { code: 401, message: '密码错误', error: 'UNAUTHORIZED' },
         { status: 401 }
@@ -42,6 +43,7 @@ export async function POST(request: Request) {
   } catch (error) {
     const message =
       error instanceof Error ? error.message : '服务器内部错误';
+    console.error('[API] POST /api/auth code=500 message=', message);
     return NextResponse.json(
       { code: 500, message, error: 'INTERNAL_ERROR' },
       { status: 500 }

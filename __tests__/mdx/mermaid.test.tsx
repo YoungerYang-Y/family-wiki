@@ -23,6 +23,7 @@ describe('MermaidChartWrapper', () => {
   it('renders children and fullscreen button', () => {
     render(
       <MermaidChartWrapper>
+        {/* eslint-disable-next-line @next/next/no-img-element -- test fixture: data URL SVG */}
         <img src="data:image/svg+xml,%3Csvg%3E%3C/svg%3E" alt="test" />
       </MermaidChartWrapper>
     );
@@ -33,6 +34,7 @@ describe('MermaidChartWrapper', () => {
   it('opens fullscreen dialog when button clicked', () => {
     render(
       <MermaidChartWrapper>
+        {/* eslint-disable-next-line @next/next/no-img-element -- test fixture: data URL SVG */}
         <img src="data:image/svg+xml,test" alt="chart" />
       </MermaidChartWrapper>
     );

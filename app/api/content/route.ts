@@ -25,6 +25,7 @@ export async function POST(request: Request) {
   // 1. 鉴权
   const payload = await authenticateRequest(request);
   if (!payload) {
+    console.error('[API] POST /api/content code=401 message=未认证或 token 无效');
     return NextResponse.json(
       { code: 401, message: '未认证或 token 无效', error: 'UNAUTHORIZED' },
       { status: 401 }
@@ -87,6 +88,7 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     if (error instanceof ConflictError) {
+      console.error('[API] POST /api/content code=409 message=', error.message);
       return NextResponse.json(
         { code: 409, message: error.message, error: 'CONFLICT' },
         { status: 409 }
@@ -95,6 +97,7 @@ export async function POST(request: Request) {
 
     const message =
       error instanceof Error ? error.message : '服务器内部错误';
+    console.error('[API] POST /api/content code=500 message=', message);
     return NextResponse.json(
       { code: 500, message, error: 'INTERNAL_ERROR' },
       { status: 500 }

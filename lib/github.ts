@@ -51,7 +51,7 @@ function getConfig() {
     token: getEnvOrThrow('GITHUB_TOKEN'),
     owner: getEnvOrThrow('GITHUB_OWNER'),
     repo: getEnvOrThrow('GITHUB_REPO'),
-    branch: getEnvOrThrow('GITHUB_BRANCH'),
+    branch: process.env.GITHUB_BRANCH ?? 'main',
   } as const;
 }
 

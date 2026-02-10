@@ -50,58 +50,9 @@ pnpm start
 | `pnpm test:e2e` | 运行 Playwright E2E 测试 |
 | `pnpm format` | Prettier 格式化 |
 
-## 环境变量
+## 环境变量与部署
 
-复制 `.env.example` 为 `.env.local`（本地）或按部署平台配置环境变量。
-
-| 变量 | 说明 | 必填 |
-|------|------|------|
-| `GITHUB_TOKEN` | GitHub Personal Access Token（repo 权限） | 编辑/发布时 |
-| `GITHUB_OWNER` | 仓库 Owner | 是 |
-| `GITHUB_REPO` | 仓库名 | 是 |
-| `GITHUB_BRANCH` | 内容分支，默认 `main` | 否 |
-| `AUTH_PASSWORD` | 编辑密码，用于在线编辑鉴权 | 编辑时 |
-| `JWT_SECRET` | JWT 签名密钥（≥32 字符） | 编辑时 |
-| `NEXT_PUBLIC_SITE_URL` | 站点完整 URL（用于 sitemap、feed、OG） | 生产环境建议设置 |
-
-详见 `.env.example` 内注释。
-
-## 部署
-
-### Vercel（推荐）
-
-1. 将仓库推送到 GitHub。
-2. 在 [Vercel](https://vercel.com) 中 **Import** 该仓库，框架选 Next.js（自动识别）。
-3. 在项目 **Settings → Environment Variables** 中配置上述环境变量（Production / Preview 按需）。
-4. 部署后：
-   - **Push to main** 会触发生产部署。
-   - **Pull Request** 会生成 Preview 部署（预览 URL 在 PR 中可见）。
-5. 可选：在 **Settings → Git** 中确认 Connected Git Repository 与分支无误。
-
-项目已包含 `vercel.json`（`framework: nextjs`、`buildCommand`、`installCommand`），无需额外配置即可使用 ISR/SSR。
-
-### Docker
-
-```bash
-# 构建镜像
-docker build -t family-wiki .
-
-# 运行（需挂载或传入环境变量）
-docker run -p 3000:3000 \
-  -e GITHUB_TOKEN=xxx \
-  -e GITHUB_OWNER=your-org \
-  -e GITHUB_REPO=your-repo \
-  -e AUTH_PASSWORD=xxx \
-  -e JWT_SECRET=xxx \
-  -e NEXT_PUBLIC_SITE_URL=https://wiki.example.com \
-  family-wiki
-```
-
-或使用 docker-compose（需在 `docker-compose.yml` 或 `.env` 中配置环境变量）：
-
-```bash
-docker-compose up
-```
+环境变量与部署方式（Vercel、Docker）详见 **[docs/config.md](docs/config.md)**。简要说明：复制 `.env.example` 为 `.env.local`，配置 `GITHUB_OWNER`、`GITHUB_REPO` 等；编辑功能还需 `GITHUB_TOKEN`、`AUTH_PASSWORD`、`JWT_SECRET`。
 
 ## 内容编写指南
 

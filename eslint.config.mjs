@@ -17,7 +17,7 @@ const eslintConfig = [
     },
   },
   {
-    ignores: ['.contentlayer/**', '.next/**', 'public/**', 'scripts/**'],
+    ignores: ['.contentlayer/**', '.next/**', 'public/**', 'scripts/**', 'playwright-report/**', 'test-results/**'],
   },
 ];
 

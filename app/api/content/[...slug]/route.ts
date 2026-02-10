@@ -23,6 +23,7 @@ export async function GET(request: Request, { params }: RouteParams) {
     if (raw) {
       const payload = await authenticateRequest(request);
       if (!payload) {
+        console.error('[API] GET /api/content/%s code=401 message=未认证或 token 无效', slug);
         return NextResponse.json(
           { code: 401, message: '未认证或 token 无效', error: 'UNAUTHORIZED' },
           { status: 401 }
@@ -32,6 +33,7 @@ export async function GET(request: Request, { params }: RouteParams) {
 
     const file = await getFile(slug);
     if (!file) {
+      console.error('[API] GET /api/content/%s code=404 message=文档不存在', slug);
       return NextResponse.json(
         { code: 404, message: '文档不存在', error: 'NOT_FOUND' },
         { status: 404 }
@@ -77,6 +79,7 @@ export async function GET(request: Request, { params }: RouteParams) {
   } catch (error) {
     const message =
       error instanceof Error ? error.message : '服务器内部错误';
+    console.error('[API] GET /api/content/%s code=500 message=%s', slug, message);
     return NextResponse.json(
       { code: 500, message, error: 'INTERNAL_ERROR' },
       { status: 500 }
