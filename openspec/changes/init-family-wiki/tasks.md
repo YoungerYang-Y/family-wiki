@@ -77,11 +77,11 @@
 
 ### Milestone 7: RSS / Atom 订阅
 
-- [ ] Task 7.1: 实现 RSS 2.0 feed 生成（`/feed.xml`）——包含最近 50 篇文章，含摘要内容
-- [ ] Task 7.2: 实现 Atom feed 生成（`/feed.atom`）——同上，Atom 格式
-- [ ] Task 7.3: 实现分类级别 feed（`/[category]/feed.xml`）——按分类订阅
-- [ ] Task 7.4: 在页面 `<head>` 中添加 feed 自动发现标签（`<link rel="alternate" type="application/rss+xml">`）
-- [ ] Task 7.5: 编写 feed 生成测试（XML 格式校验、内容完整性校验）
+- [x] Task 7.1: 实现 RSS 2.0 feed 生成（`/feed.xml`）——包含最近 50 篇文章，含摘要内容
+- [x] Task 7.2: 实现 Atom feed 生成（`/feed.atom`）——同上，Atom 格式
+- [x] Task 7.3: 实现分类级别 feed（`/[category]/feed.xml`）——按分类订阅
+- [x] Task 7.4: 在页面 `<head>` 中添加 feed 自动发现标签（`<link rel="alternate" type="application/rss+xml">`）
+- [x] Task 7.5: 编写 feed 生成测试（XML 格式校验、内容完整性校验）
 
 **依赖关系**：Task 7.1~7.3 依赖 Milestone 1（Contentlayer 就绪），可并行；Task 7.4 依赖 Milestone 2（Layout 就绪）；Task 7.5 依赖 7.1~7.4
 

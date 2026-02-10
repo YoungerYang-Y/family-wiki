@@ -8,6 +8,9 @@ import { Footer } from '@/components/layout/footer';
 import { SearchDialog } from '@/components/search/search-dialog';
 import { getSidebarCategories } from '@/lib/categories';
 import { allWikis } from 'contentlayer/generated';
+import { siteConfig } from '@/config/site';
+
+const baseUrl = siteConfig.url.replace(/\/$/, '');
 
 export const metadata: Metadata = {
   title: { default: 'Family Wiki', template: '%s | Family Wiki' },
@@ -22,6 +25,12 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Family Wiki',
     description: '个人决策型知识库',
+  },
+  alternates: {
+    types: {
+      'application/rss+xml': `${baseUrl}/feed.xml`,
+      'application/atom+xml': `${baseUrl}/feed.atom`,
+    },
   },
 };
 
